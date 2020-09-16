@@ -3,6 +3,8 @@ import './SortingVisualizer.css';
 import {getSelectionSortAnimations} from '../SortingAlgorithms/SelectionSort'
 import {getBubbleSortAnimations} from '../SortingAlgorithms/BubbleSort';
 import {getInsertionSortAnimations} from '../SortingAlgorithms/InsertionSort';
+import {getMergeSortAnimations} from '../SortingAlgorithms/MergeSort';
+import {getHeapSortAnimations} from '../SortingAlgorithms/HeapSort';
 
 
 const ANIMATION_SPEED_MS=500;
