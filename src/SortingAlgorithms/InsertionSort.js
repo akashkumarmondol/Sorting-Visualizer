@@ -2,7 +2,7 @@ export function getInsertionSortAnimations(array)
 {
     let animations=[];
     insertionSort(array,animations);
-    return [animations,array];
+    return animations;
 }
 function insertionSort(array,animations)
 {

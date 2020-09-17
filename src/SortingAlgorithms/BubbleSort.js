@@ -2,7 +2,7 @@ export function getBubbleSortAnimations(array)
 {
     let animations=[];
     bubbleSort(array,animations);
-    return [animations,array];
+    return animations;
 }
 function bubbleSort(array,animations)
 {

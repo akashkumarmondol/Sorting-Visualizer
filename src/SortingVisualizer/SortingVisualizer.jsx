@@ -7,8 +7,8 @@ import {getMergeSortAnimations} from '../SortingAlgorithms/MergeSort';
 import {getHeapSortAnimations} from '../SortingAlgorithms/HeapSort';
 
 
-const ANIMATION_SPEED_MS=500;
-const NUMBER_OF_ARRAY_BARS = 10; 
+const ANIMATION_SPEED_MS=50;
+const NUMBER_OF_ARRAY_BARS = 15; 
 const PRIMARY_COLOR = 'turquoise';
 const SECONDARY_COLOR = 'red';
 
@@ -33,7 +33,7 @@ resetArray(){
 }
 insertionSort()
 {
-    const [animations,arr]=getInsertionSortAnimations(this.state.array);
+    const animations = getInsertionSortAnimations(this.state.array);
     for(let i=0;i<animations.length;i++)
     {
         //console.log(animations[i]);
@@ -73,8 +73,8 @@ insertionSort()
 
 }
 selectionSort(){
-    const [animations,sortArray,len]=getSelectionSortAnimations(this.state.array);
-    for(let i=0;i<len;i++)
+    const animations = getSelectionSortAnimations(this.state.array);
+    for(let i=0;i<animations.length;i++)
     {
         console.log(animations[i]);
         const arrayBars=document.getElementsByClassName('array-bar');
@@ -115,7 +115,7 @@ selectionSort(){
 
 bubbleSort()
 {
-    const [animations,arr]=getBubbleSortAnimations(this.state.array);
+    const animations = getBubbleSortAnimations(this.state.array);
     for(let i=0;i<animations.length;i++)
     {
         console.log(animations[i]);
@@ -153,15 +153,68 @@ bubbleSort()
     }
 }
 mergeSort()
-{
-
-
+{ 
+    const animations = getMergeSortAnimations(this.state.array);
+    for (let i = 0; i < animations.length; i++) {
+      const arrayBars = document.getElementsByClassName('array-bar');
+      if (i % 3 !== 2) {
+        const [barOneIdx, barTwoIdx] = animations[i];
+        const barOneStyle = arrayBars[barOneIdx].style;
+        const barTwoStyle = arrayBars[barTwoIdx].style;
+        const color = i % 3 === 0 ? SECONDARY_COLOR : PRIMARY_COLOR;
+        setTimeout(() => {
+          barOneStyle.backgroundColor = color;
+          barTwoStyle.backgroundColor = color;
+        }, i * ANIMATION_SPEED_MS);
+      } else {
+        setTimeout(() => {
+          const [barOneIdx, newHeight] = animations[i];
+          const barOneStyle = arrayBars[barOneIdx].style;
+          barOneStyle.height = `${newHeight}px`;
+        }, i * ANIMATION_SPEED_MS);
+      }
+    }
 
 }
 heapSort()
 {
-
-
+    const animations = getHeapSortAnimations(this.state.array);
+    for(let i=0;i<animations.length;i++)
+    {
+        //console.log(animations[i]);
+        const arrayBars=document.getElementsByClassName('array-bar');
+        if(animations[i][0]==="comp1" || (animations[i][0]==="comp2"))
+        { 
+            const color=(animations[i][0]==="comp1")? SECONDARY_COLOR:PRIMARY_COLOR;
+            const [temp,barOneIndex,barTwoIndex]=animations[i];
+            console.log(animations[i]);
+            const barOneStyle=arrayBars[barOneIndex].style
+            const barTwoStyle=arrayBars[barTwoIndex].style;
+            setTimeout( ()=> {
+                barOneStyle.backgroundColor = color;
+                barTwoStyle.backgroundColor = color;
+            },i*ANIMATION_SPEED_MS);
+        }
+        else if(animations[i][0]==="colorChangedOne" || animations[i][0]==="colorChangedTwo")
+        {
+            const [temp,barIndex1,barIndex2]=animations[i];
+            const colorbar=(animations[i][0]==="colorChangedOne")? SECONDARY_COLOR:PRIMARY_COLOR;
+            const barStyle1=arrayBars[barIndex1].style;
+            const barStyle2=arrayBars[barIndex2].style;
+            setTimeout(()=>{
+                barStyle1.backgroundColor = colorbar;
+                barStyle2.backgroundColor = colorbar;
+            },i*ANIMATION_SPEED_MS);
+        }
+        else
+        {
+            const [temp,barIndex,newHeight]=animations[i];
+            const barStyle=arrayBars[barIndex].style;
+            setTimeout(()=>{
+                barStyle.height=`${newHeight}px`;
+            },i*ANIMATION_SPEED_MS);
+        }
+    }
 
 }
 
