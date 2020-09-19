@@ -41,7 +41,6 @@ insertionSort()
     const animations = getInsertionSortAnimations(this.state.array);
     for(let i=0;i<animations.length;i++)
     {
-        //console.log(animations[i]);
         const arrayBars=document.getElementsByClassName('array-bar');
         if(animations[i][0]=="comp1" || animations[i][0]=="comp2")
         {
@@ -68,9 +67,10 @@ insertionSort()
         else
         {
             let [temp,barIndex,newHeight]=animations[i];
-            let barStyle=arrayBars[barIndex].style;
+            let barStyle=arrayBars[barIndex];
             setTimeout(() => {
-                barStyle.height=`${newHeight}px`;
+                barStyle.style.height=`${newHeight}px`;
+                barStyle.innerHTML = `${newHeight}`;
             }, i*ANIMATION_SPEED_MS);
         }
     }
@@ -80,6 +80,7 @@ insertionSort()
 selectionSort(){
     const [animations,array] = getSelectionSortAnimations(this.state.array);
     const N=animations.length+array.length;
+
     for(let i=0;i<N;i++)
     {
         const arrayBars=document.getElementsByClassName('array-bar');
@@ -95,10 +96,9 @@ selectionSort(){
         { 
             const color=(animations[i][0]==="comp1")? SECONDARY_COLOR:PRIMARY_COLOR;
             const [temp,barOneIndex,barTwoIndex]=animations[i];
-            console.log(animations[i]);
-            console.log(temp);console.log(barOneIndex);console.log(barTwoIndex);
             const barOneStyle=arrayBars[barOneIndex].style
             const barTwoStyle=arrayBars[barTwoIndex].style;
+            
             setTimeout( ()=> {
                 barOneStyle.backgroundColor = color;
                 barTwoStyle.backgroundColor = color;
@@ -126,9 +126,11 @@ selectionSort(){
         else
         {
             const [temp,barIndex,newHeight]=animations[i];
-            const barStyle=arrayBars[barIndex].style;
+            const barStyle=arrayBars[barIndex];
+            
             setTimeout(()=>{
-                barStyle.height=`${newHeight}px`;
+                barStyle.style.height=`${newHeight}px`;
+                barStyle.innerHTML = `${newHeight}`;
             },i*ANIMATION_SPEED_MS);
         }
     }
@@ -182,9 +184,10 @@ bubbleSort()
         else
         {
             let [temp,barIndex,newHeight]=animations[i];
-            let barStyle=arrayBars[barIndex].style;
+            let barStyle=arrayBars[barIndex];
             setTimeout(() => {
-                barStyle.height=`${newHeight}px`;
+                barStyle.style.height=`${newHeight}px`;
+                barStyle.innerHTML = `${newHeight}`;
             }, i*ANIMATION_SPEED_MS);
         }
     }
@@ -221,9 +224,10 @@ mergeSort()
         else
         {
             let [temp,barIndex,newHeight]=animations[i];
-            let barStyle=arrayBars[barIndex].style;
+            let barStyle=arrayBars[barIndex];
             setTimeout(() => {
-                barStyle.height=`${newHeight}px`;
+                barStyle.style.height=`${newHeight}px`;
+                barStyle.innerHTML = `${newHeight}`;
             }, i*ANIMATION_SPEED_MS);
         }
     }
@@ -278,9 +282,10 @@ heapSort()
         else
         {
             const [temp,barIndex,newHeight]=animations[i];
-            const barStyle=arrayBars[barIndex].style;
+            const barStyle=arrayBars[barIndex];
             setTimeout(()=>{
-                barStyle.height=`${newHeight}px`;
+                barStyle.style.height=`${newHeight}px`;
+                barStyle.innerHTML = `${newHeight}`;
             },i*ANIMATION_SPEED_MS);
         }
     }
@@ -310,6 +315,7 @@ quickSort()
            // console.log(animations[i]);
             const barOneStyle=arrayBars[barOneIndex].style
             const barTwoStyle=arrayBars[barTwoIndex].style;
+            //console.log("Hello: ",arrayBars);
             setTimeout( ()=> {
                 barOneStyle.backgroundColor = color;
                 barTwoStyle.backgroundColor = color;
@@ -338,27 +344,26 @@ quickSort()
         else
         {
             const [temp,barIndex,newHeight]=animations[i];
-            const barStyle=arrayBars[barIndex].style;
+            const barStyle=arrayBars[barIndex];
             setTimeout(()=>{
-                barStyle.height=`${newHeight}px`;
-                //barStyle.barIndex=`${newHeight}px`;
+                barStyle.style.height=`${newHeight}px`;
+                barStyle.innerHTML = `${newHeight}`;
             },i*ANIMATION_SPEED_MS);
         }
     }
 }
 
-
 render(){
     const {array} = this.state;
+    
     return(
         <div className="array-container">
             {
                 array.map((value,idx) =>(
-                    console.log(value),
-                    console.log(idx),
                     <div
                     className="array-bar"
                     key={idx}
+
                     style={{
                         backgroundColor: PRIMARY_COLOR,
                         height: `${value}px`,
@@ -377,12 +382,9 @@ render(){
                 <button onClick={() =>this.quickSort()}>Quick Sort</button>
             </div>
         </div>
-        
-
     );
 }
 }
 function randomIntFromInterval(min,max) {
     return Math.floor(Math.random()*(max-min+1)+min);
-    
 }
