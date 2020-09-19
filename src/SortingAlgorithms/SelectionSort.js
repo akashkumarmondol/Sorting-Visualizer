@@ -4,7 +4,7 @@ export function getSelectionSortAnimations(array)
     selectionSort(array,animations);
     //console.log(array);
     let len=animations.length;
-    return animations;
+    return [animations,array];
 }
 
 function selectionSort(array,animations)
@@ -29,5 +29,7 @@ function selectionSort(array,animations)
         let temp=array[minIdx];
         array[minIdx]=array[i];
         array[i]=temp;
+        animations.push(["Fixed",i]);
     }
+    animations.push(["Fixed",n-1]);
 }

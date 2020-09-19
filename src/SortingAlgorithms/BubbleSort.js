@@ -2,7 +2,7 @@ export function getBubbleSortAnimations(array)
 {
     let animations=[];
     bubbleSort(array,animations);
-    return animations;
+    return [animations,array];
 }
 function bubbleSort(array,animations)
 {
@@ -25,5 +25,7 @@ function bubbleSort(array,animations)
                 array[j+1]=temp;
             }
         }
+        animations.push(["Fixed",N-i-1]);
     }
+    animations.push(["Fixed",0]);
 }

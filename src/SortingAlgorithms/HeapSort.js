@@ -2,17 +2,17 @@
 export function getHeapSortAnimations(array)
 {
     let animations = [];
-    console.log(array);
+    //console.log(array);
     heapSort(array,animations);
-    console.log(array);
-    return animations;
+   // console.log(array);
+    return [animations,array];
 }
 
 function heapSort(array,animations)
 {
     const N=array.length;
     buildMaxHeap(array,animations);
-    console.log(array);
+   // console.log(array);
    
     for(let i=N-1;i>0;i--)
     {
@@ -21,6 +21,7 @@ function heapSort(array,animations)
         animations.push(["swap",0,array[i]]);
         animations.push(["swap",i,array[0]]);
         animations.push(["colorChangedTwo",i,0]);
+        animations.push(["Fixed",i,i]);
         let temp=array[0];
         array[0]=array[i];
         array[i]=temp;
@@ -56,6 +57,7 @@ function heapSort(array,animations)
 
         }while(index<i);
     }
+    animations.push(["Fixed",0,0]);
 
 }
 

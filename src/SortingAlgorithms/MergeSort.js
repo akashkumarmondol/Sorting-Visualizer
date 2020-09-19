@@ -13,6 +13,8 @@ export function getMergeSortAnimations(array) {
     mergeSortHelper(auxiliaryArray, middleIdx + 1, endIdx, mainArray, animations);
     doMerge(mainArray, startIdx, middleIdx, endIdx, auxiliaryArray, animations);
   }
+
+  // Now back to the right position
   
   function doMerge(mainArray, startIdx, middleIdx, endIdx, auxiliaryArray, animations)
   {
@@ -20,27 +22,35 @@ export function getMergeSortAnimations(array) {
     let i = startIdx;
     let j = middleIdx + 1;
     while (i <= middleIdx && j <= endIdx) {
-      animations.push([i, j]);
-      animations.push([i, j]);
+      animations.push(["comp1",i, j]);
+      animations.push(["comp2",i, j]);
       if (auxiliaryArray[i] <= auxiliaryArray[j]) {
-        animations.push([k, auxiliaryArray[i]]);
+        animations.push(["colorChangedOne",k,k]);
+        animations.push(["swap",k, auxiliaryArray[i]]);
+        animations.push(["colorChangedTwo",k,k]);
         mainArray[k++] = auxiliaryArray[i++];
       }
        else {
-        animations.push([k, auxiliaryArray[j]]);
+        animations.push(["colorChangedOne",k,k]);
+        animations.push(["swap",k, auxiliaryArray[j]]);
+        animations.push(["colorChangedTwo",k,k]);
         mainArray[k++] = auxiliaryArray[j++];
       }
     }
     while (i <= middleIdx) {
-      animations.push([i, i]);
-      animations.push([i, i]);
-      animations.push([k, auxiliaryArray[i]]);
+      //animations.push([i, i]);
+      //animations.push([i, i]);
+      animations.push(["colorChangedOne",k,k]);
+      animations.push(["swap",k, auxiliaryArray[i]]);
+      animations.push(["colorChangedTwo",k,k]);
       mainArray[k++] = auxiliaryArray[i++];
     }
     while (j <= endIdx) {
-      animations.push([j, j]);
-      animations.push([j, j]);
-      animations.push([k, auxiliaryArray[j]]);
+     // animations.push([j, j]);
+     // animations.push([j, j]);
+     animations.push(["colorChangedOne",k,k]);
+      animations.push(["swap",k, auxiliaryArray[j]]);
+      animations.push(["colorChangedTwo",k,k]);
       mainArray[k++] = auxiliaryArray[j++];
     }
   }
